@@ -1,0 +1,12 @@
+@startuml
+[*] --> Disponível
+
+Disponível --> Reservado : reservar()
+Reservado --> Disponível : cancelarReserva() / prazo expirado
+
+Disponível --> Emprestado : emprestar()
+Reservado --> Emprestado : emprestar()
+
+Emprestado --> Disponível : devolver()
+
+@enduml

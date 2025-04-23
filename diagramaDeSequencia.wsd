@@ -1,0 +1,21 @@
+@startuml
+actor Aluno
+participant "Sistema" as Sistema
+participant "Bibliotecário" as Biblio
+participant "Base de Dados" as BD
+
+Aluno -> Sistema : solicitarEmprestimo(livroId)
+Sistema -> BD : verificarEmprestimos(usuarioId)
+BD --> Sistema : quantidadeAtual
+
+alt Limite não atingido
+  Sistema -> Biblio : solicitarConfirmacao(usuarioId, livroId)
+  Biblio -> Sistema : confirmarEmprestimo()
+  Sistema -> BD : registrarEmprestimo(usuarioId, livroId)
+  BD --> Sistema : confirmação
+  Sistema --> Aluno : emprestimoConcluido()
+else Limite atingido
+  Sistema --> Aluno : emprestimoNegado("Limite atingido")
+end
+
+@enduml

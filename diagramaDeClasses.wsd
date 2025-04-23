@@ -1,0 +1,48 @@
+@startuml
+
+class Usuario {
+  - id: int
+  - nome: string
+  - email: string
+  - senha: string
+}
+
+class Aluno
+class Bibliotecario
+class Administrador
+
+Usuario <|-- Aluno
+Usuario <|-- Bibliotecario
+Usuario <|-- Administrador
+
+class Livro {
+  - id: int
+  - titulo: string
+  - autor: string
+  - categoria: string
+  - status: string
+}
+
+class Emprestimo {
+  - id: int
+  - dataEmprestimo: Date
+  - dataDevolucao: Date
+  - renovado: boolean
+}
+
+class Reserva {
+  - id: int
+  - dataReserva: Date
+  - notificado: boolean
+}
+
+Usuario "1" --> "*" Emprestimo
+Usuario "1" --> "*" Reserva
+Livro "1" --> "*" Emprestimo
+Livro "1" --> "*" Reserva
+Emprestimo "1" --> "1" Livro
+Emprestimo "1" --> "1" Usuario
+Reserva "1" --> "1" Livro
+Reserva "1" --> "1" Usuario
+
+@enduml

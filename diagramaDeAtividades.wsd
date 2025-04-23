@@ -1,0 +1,21 @@
+@startuml
+start
+
+:Solicitar renovação;
+
+if (Já foi renovado?) then (Sim)
+  :Negar renovação;
+  stop
+else (Não)
+  if (Livro está reservado?) then (Sim)
+    :Negar renovação;
+    stop
+  else (Não)
+    :Atualizar data de devolução;
+    :Marcar empréstimo como renovado;
+    :Confirmar renovação ao usuário;
+    stop
+  endif
+endif
+
+@enduml
